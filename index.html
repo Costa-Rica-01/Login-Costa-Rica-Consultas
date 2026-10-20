@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animated Login form lamp Using HTML CSS JS</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Poppins,sans-serif;background:#0a0a0a;min-height:100vh;display:flex;justify-content:center;align-items:center;overflow:hidden;transition:.6s}
+body.light-on{background:#1a1a1a}
+.wrapper{width:420px;height:100vh;display:flex;flex-direction:column;align-items:center;padding-top:40px}
+.scene{position:relative;width:320px;height:380px;display:flex;justify-content:center}
+.lamp{position:absolute;left:20px;top:20px;z-index:3;cursor:pointer}
+.shade{width:90px;height:50px;background:linear-gradient(#2a2a2a,#111);border-radius:90px 90px 10px 10px;border:2px solid #c9a43a}
+.arm{width:4px;height:80px;background:#333;transform:rotate(-15deg);margin-top:-5px;position:relative}
+.arm::before{content:'';position:absolute;top:30px;left:-6px;width:14px;height:14px;background:#111;border:2px solid #c9a43a;border-radius:50%}
+.base{width:50px;height:8px;background:#111;border:1px solid #c9a43a;border-radius:50%;margin-top:-10px;transform:rotate(-15deg) translateX(-20px)}
+.string{position:absolute;top:45px;left:55px;width:2px;height:60px;background:#e0cda0}
+.string::after{content:'';position:absolute;bottom:-8px;left:-4px;width:10px;height:10px;background:#e0cda0;border-radius:50%}
+.tooltip{position:absolute;top:95px;left:60px;background:#111;color:#fff;font-size:10px;padding:4px 8px;border-radius:4px;white-space:nowrap}
+.light-cone{position:absolute;top:68px;left:-60px;width:240px;height:300px;background:radial-gradient(ellipse at 50% 0%, rgba(255,244,150,.25), transparent 70%);clip-path:polygon(35% 0,65% 0,100% 100%,0% 100%);opacity:0;transition:.5s;pointer-events:none}
+body.light-on .light-cone{opacity:1}
+.bulb-glow{position:absolute;top:50px;left:50%;width:30px;height:30px;background:radial-gradient(#fff9c4,#ffeb3b);border-radius:50%;opacity:0;box-shadow:0 0 30px 15px rgba(255,235,100,.8);transition:.3s}
+body.light-on .bulb-glow{opacity:1}
+.login-form{width:300px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:24px;margin-top:20px;transform:translateY(30px);opacity:0;transition:.6s}
+body.light-on .login-form{transform:translateY(0);opacity:1;border-color:rgba(255,235,100,.3)}
+.login-form h2{color:#fff;text-align:center;margin-bottom:18px}
+.form-group{margin-bottom:14px}
+.form-group label{color:#aaa;font-size:13px;display:block;margin-bottom:4px}
+.form-group input{width:100%;padding:10px 12px;background:#111;border:1px solid #333;border-radius:8px;color:#fff;outline:none}
+.form-group input:focus{border-color:#ffeb3b}
+.login-btn{width:100%;padding:11px;background:linear-gradient(90deg,#ffeb3b,#ff9800);border:none;border-radius:8px;font-weight:600;cursor:pointer}
+.pull-anim{animation:pull .35s ease} @keyframes pull{0%{height:60px}50%{height:85px}100%{height:60px}}
+</style>
+</head>
+<body id="body">
+<div class="wrapper">
+<div class="scene">
+<div class="lamp" id="lamp">
+<div class="shade"></div><div class="arm"></div><div class="base"></div>
+<div class="string" id="string"></div>
+<div class="tooltip" id="tip">Pull string to turn on</div>
+</div>
+<div class="bulb-glow"></div>
+<div class="light-cone"></div>
+</div>
+<div class="login-form">
+<h2>Welcome</h2>
+<form onsubmit="return goToYourPage(event)">
+<div class="form-group"><label>Username</label><input type="text" id="username" placeholder="Enter name" required></div>
+<div class="form-group"><label>Password</label><input type="password" id="password" placeholder="Enter Password" required></div>
+<button class="login-btn" type="submit">Sign In</button>
+</form>
+</div>
+</div>
+<script>
+let isOn=false;
+document.getElementById('lamp').onclick=()=>{
+ const body=document.getElementById('body');
+ const s=document.getElementById('string');
+ const tip=document.getElementById('tip');
+ s.classList.add('pull-anim'); setTimeout(()=>s.classList.remove('pull-anim'),350);
+ isOn=!isOn; body.classList.toggle('light-on',isOn);
+ tip.textContent=isOn?'Pull string to turn off':'Pull string to turn on';
+};
+
+function goToYourPage(e){
+ e.preventDefault();
+ const u = document.getElementById('username').value.trim();
+ const p = document.getElementById('password').value.trim();
+ if(!u || !p){ alert('Por favor completa usuario y contraseña'); return false; }
+ window.location.href='https://consultascivicil.blogspot.com/?m=1';
+ return false;
+}
+</script>
+</body>
+</html>
